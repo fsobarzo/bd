@@ -4,5 +4,6 @@
 	<%= link_to "Salir", destroy_admin_session_path, method: :delete %>
 <% end %>
 <% if detective_signed_in? %>
+	<%= link_to "Casos", detective_instances_path(current_detective.id) %></br>
 	<%= link_to "Salir", destroy_detective_session_path, method: :delete %>
 <% end %>

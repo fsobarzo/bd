@@ -1,2 +1,24 @@
-<h1>Instances#show</h1>
-<p>Find me in app/views/instances/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+ 
+<p>
+  <strong>Name:</strong>
+  <%= @instance.name %>
+</p>
+
+<p>
+  <strong>Victima:</strong>
+  <%= @instance.victim %>
+</p>
+
+<p>
+  <strong>Lugar:</strong>
+  <%= @instance.date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @instance.description %>
+</p>
+ 
+<%= link_to 'Edit', edit_detective_instance_path(current_detective.id, @instance) %> |
+<%= link_to 'Back', detective_instances_path(current_detective.id) %>

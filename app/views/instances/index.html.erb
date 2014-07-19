@@ -1,7 +1,32 @@
-<h1>Instances#index</h1>
-<p>Find me in app/views/instances/index.html.erb</p>
+<h1>Casos</h1>
 
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Victima</th>
+      <th>Lugar</th>
+      <th>Fecha Ocurrencia</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
 
-<% @instances.each do |i| %>
-	<%= i.name %>
-<% end %>
+  <tbody>
+    <% @instances.each do |i| %>
+      <tr>
+        <td><%= i.name %></td>
+        <td><%= i.victim %></td>
+        <td><%= i.place %></td>
+        <td><%= i.description %></td>
+        <td><%= i.date %></td>
+        <td><%= link_to 'Show', detective_instance_path(current_detective.id, i.id) %></td>
+        <td><%= link_to 'Edit', edit_detective_instance_path(current_detective.id, i.id) %></td>
+        <td><%= link_to 'Destroy', detective_instance_path(current_detective.id, i.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Caso', new_detective_instance_path(current_detective.id) %>
