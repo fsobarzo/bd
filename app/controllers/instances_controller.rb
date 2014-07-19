@@ -1,6 +1,7 @@
 class InstancesController < ApplicationController
 
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
+  before_action :set_detective, only: [:create]
   
   def index
     @instances = Instance.all
@@ -12,6 +13,7 @@ class InstancesController < ApplicationController
 
   def create
     @instance = Instance.new(place_params)
+    @instance.detective = @detective
  
     respond_to do |format|
       if @instance.save
@@ -55,7 +57,11 @@ class InstancesController < ApplicationController
       @instance = Instance.find(params[:id])
     end
 
+    def set_detective
+      @detective = Detective.find(params[:detective_id])
+    end
+
     def place_params
-      params.require(:instance).permit(:name, :victim, :place, :description, :date)
+      params.require(:instance).permit(:name, :victim, :place, :description, :date, :detective_id)
     end
 end

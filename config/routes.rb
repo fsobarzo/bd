@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :instances
   end
 
+  resources :guests
+
   # Example resource route with options:
   #   resources :products do
   #     member do
