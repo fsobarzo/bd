@@ -11,14 +11,38 @@
 </p>
 
 <p>
-  <strong>Lugar:</strong>
+  <strong>Fecha:</strong>
   <%= @instance.date %>
 </p>
+
+<p>
+  <strong>Arma:</strong>
+  <%# @instance.weapon.name %>
+  <% @instance.weapons.each do |w| %>
+  	<%=  w.name %>
+	<% end %>
+</p>
+
+<p>
+  <strong>Lugar:</strong>
+  <%# @instance.place.name %>
+  <% @instance.places.each do |p| %>
+  	<%=  p.name %>
+	<% end %>
+</p>
+
 
 <p>
   <strong>Description:</strong>
   <%= @instance.description %>
 </p>
  
+<p>
+  <strong>CasoCerrado</strong>
+  <%= @instance.state %>
+</p>
+
+
 <%= link_to 'Edit', edit_detective_instance_path(current_detective.id, @instance) %> |
 <%= link_to 'Back', detective_instances_path(current_detective.id) %>
+<%= link_to 'Cerrar Caso', close_detective_instance(current_detective.id) %>

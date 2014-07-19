@@ -25,9 +25,13 @@
   </div>
   <div class="field">
     <%= f.label :place %><br>
-    <%= f.text_field :place %>
+    <%= f.collection_select(:places, Place.all, :id, :name) %>
   </div>
   <div class="field">
+    <%= f.label :weapon %><br>
+    <%= f.collection_select(:weapons, Weapon.all, :id, :name) %>
+  </div>
+   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>

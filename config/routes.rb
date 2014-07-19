@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
   resources :weapons
-
   resources :places
-  resources :people
 
   devise_for :admins
   devise_for :detectives
@@ -23,9 +21,10 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :detectives do
+  resources :detectives do  
     resources :instances
   end
+
 
   # Example resource route with options:
   #   resources :products do

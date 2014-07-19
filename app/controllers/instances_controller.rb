@@ -1,7 +1,9 @@
 class InstancesController < ApplicationController
 
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_weapon, only: [:create]
+  before_action :set_place, only: [:create]
+
   def index
     @instances = Instance.all
   end
@@ -12,7 +14,8 @@ class InstancesController < ApplicationController
 
   def create
     @instance = Instance.new(place_params)
- 
+    @instance.weapons<<@weapon
+    @instance.places<<@place
     respond_to do |format|
       if @instance.save
         format.html { redirect_to [current_detective, @instance], notice: 'Place was successfully created.' }
@@ -50,12 +53,28 @@ class InstancesController < ApplicationController
     end
   end
 
+  def close
+    instance = Instance.find(params[:id])
+    state = not(instace.state)
+    instance.update_attributes(:state => state)
+
+  end
+
+
   private
     def set_instance
       @instance = Instance.find(params[:id])
     end
 
     def place_params
-      params.require(:instance).permit(:name, :victim, :place, :description, :date)
+      params.require(:instance).permit(:name, :victim, :place, :description, :date, :status)
+    end
+
+    def set_weapon
+      @weapon = Weapon.find(params[:instance][:weapons])
+    end
+
+    def set_place
+      @place = Place.find(params[:instance][:places])
     end
 end
