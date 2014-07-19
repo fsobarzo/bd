@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :weapons
+
+  resources :places
+  resources :people
+
   devise_for :admins
   devise_for :detectives
   # The priority is based upon order of creation: first created -> highest priority.

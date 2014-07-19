@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  edad: 1
+  ocupacion: MyString
+
+two:
+  nombre: MyString
+  edad: 1
+  ocupacion: MyString
