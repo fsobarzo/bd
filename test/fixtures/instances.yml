@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  victim: MyString
+  date: 2014-07-18 23:32:43
+  place: MyString
+  description: MyText
+
+two:
+  name: MyString
+  victim: MyString
+  date: 2014-07-18 23:32:43
+  place: MyString
+  description: MyText
