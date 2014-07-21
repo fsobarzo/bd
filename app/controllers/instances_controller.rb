@@ -55,9 +55,9 @@ class InstancesController < ApplicationController
 
   def close
     instance = Instance.find(params[:id])
-    state = not(instace.state)
+    state = !instance.state
     instance.update_attributes(:state => state)
-
+    redirect_to detective_instances_path
   end
 
 

@@ -22,7 +22,11 @@ Rails.application.routes.draw do
   #   resources :products
 
   resources :detectives do  
-    resources :instances
+    resources :instances do
+      member do
+        get :close
+      end
+    end
   end
 
 

@@ -49,8 +49,16 @@ ActiveRecord::Schema.define(version: 20140719080355) do
   add_index "detectives", ["email"], name: "index_detectives_on_email", unique: true
   add_index "detectives", ["reset_password_token"], name: "index_detectives_on_reset_password_token", unique: true
 
-# Could not dump table "instances" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "instances", force: true do |t|
+    t.string   "name"
+    t.string   "victim"
+    t.datetime "date"
+    t.string   "place"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "state",       default: false
+  end
 
   create_table "instances_places", id: false, force: true do |t|
     t.integer "instance_id"

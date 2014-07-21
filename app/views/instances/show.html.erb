@@ -44,5 +44,5 @@
 
 
 <%= link_to 'Edit', edit_detective_instance_path(current_detective.id, @instance) %> |
-<%= link_to 'Back', detective_instances_path(current_detective.id) %>
-<%= link_to 'Cerrar Caso', close_detective_instance(current_detective.id) %>
+<%= link_to 'Back', detective_instances_path(current_detective.id) %> |
+<%= link_to 'Cerrar', close_detective_instance_path(current_detective.id, @instance) %>
