@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Detective</th>
       <th>Nombre</th>
       <th>Victima</th>
       <th>Lugar</th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @instances.each do |i| %>
       <tr>
+        <td><%= i.detective.email %></td>
         <td><%= i.name %></td>
         <td><%= i.victim %></td>
         <td><%= i.place %></td>
@@ -29,4 +31,5 @@
 
 <br>
 
-<%= link_to 'Nuevo Caso', new_detective_instance_path(current_detective.id) %>
+<%= link_to 'Nuevo Caso', new_detective_instance_path(current_detective.id) %></br>
+<%= link_to 'Volver', root_path %>

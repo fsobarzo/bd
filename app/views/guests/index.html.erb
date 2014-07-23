@@ -1,0 +1,31 @@
+<h1>Personas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ocupación</th>
+      <th colspan="3">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @guests.each do |g| %>
+      <tr>
+        <td><%= g.name %></td>
+        <td><%= g.age %></td>
+        <td><%= g.ocupation %></td>
+
+        <td><%= link_to 'Show', g %></td>
+        <td><%= link_to 'Edit', edit_guest_path(g) %></td>
+        <td><%= link_to 'Destroy', g, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Agregar Persona', new_guest_path %></br>
+<%= link_to 'Volver', root_path %>
