@@ -11,19 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :age %><br>
-    <%= f.number_field :age %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :age %><br>
+      <%= f.number_field :age, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ocupation %><br>
-    <%= f.text_field :ocupation %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :ocupation %><br>
+      <%= f.text_field :ocupation, class: "form-control" %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Agregar', :class => 'btn btn-default' %>
+    <%= link_to 'Back', guests_path, class: "btn btn-default" %>
   </div>
 <% end %>

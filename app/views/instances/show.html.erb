@@ -1,24 +1,31 @@
+<div class="row">
+  <div class="col-lg-12">
+      <h1 class="page-header">Casos</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
 <p id="notice"><%= notice %></p>
  
 <p>
   <strong>Name:</strong>
   <%= @instance.name %>
 </p>
+<% if can? %>
+	<p>
+	  <strong>Victima:</strong>
+	  <%= @instance.victim %>
+	</p>
 
-<p>
-  <strong>Victima:</strong>
-  <%= @instance.victim %>
-</p>
+	<p>
+  	<strong>Lugar:</strong>
+  	<%= @instance.date %>
+	</p>
 
-<p>
-  <strong>Lugar:</strong>
-  <%= @instance.date %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @instance.description %>
-</p>
+	<p>
+  	<strong>Description:</strong>
+  	<%= @instance.description %>
+	</p>
+<% end %>
  
 <%= link_to 'Edit', edit_detective_instance_path(current_detective.id, @instance) %> |
 <%= link_to 'Back', detective_instances_path(current_detective.id) %>

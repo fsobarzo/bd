@@ -1,5 +1,7 @@
 class InstancesController < ApplicationController
 
+  before_filter :authenticate_user!
+  before_filter :self!, only: [:edit, :destroy]
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
   before_action :set_detective, only: [:create]
   

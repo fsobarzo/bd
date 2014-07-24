@@ -7,8 +7,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if admin_signed_in? %>
+    <%= link_to fa_icon("user", text: "#{current_admin.email}") %>
+  
+    <%= link_to fa_icon("sign-out", text: "Salir"), destroy_admin_session_path, :method => :delete %>
+  
+  <% elsif detective_signed_in? %>
+    <%= link_to fa_icon("user", text: "#{current_detective.email}") %></a>
+  
+    <%= link_to fa_icon("sign-out", text: "Salir"), destroy_detective_session_path, :method => :delete %>
+  
+  <% else %>
+  	<%= link_to fa_icon("sign-in", text: "Detective"), new_detective_session_path %>
+  	
+  	<%= link_to fa_icon("sign-in", text: "Admin"), new_admin_session_path %>
+  <% end %>
 
+  <% if admin_signed_in? %>
+  <% elsif detective_signed_in? %>
+
+	    <%= link_to fa_icon("dashboard", text: "Casos"), detective_instances_path(current_detective.id) %>
+
+	    <%= link_to fa_icon("dashboard", text: "Personas"), guests_path %>
+
+  <% end %>
+
+<% if notice %>
+
+<% end %>
+<% if flash[:error] %>
+
+<% end %>
+	
 <%= yield %>
-
 </body>
 </html>
