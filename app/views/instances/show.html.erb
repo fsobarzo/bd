@@ -4,57 +4,64 @@
   </div>
   <!-- /.col-lg-12 -->
 </div>
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @instance.name %>
-</p>
-<% if can? %>
-	<p>
-	  <strong>Victima:</strong>
-	  <%= @instance.guests.victim?.name %>
-	</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <b><%= @instance.name.capitalize %></b>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Name:</strong>
+          <%= @instance.name %>
+        </p>
+        <% if can? %>
+          <p>
+            <strong>Victima:</strong>
+            <%= @instance.guests.victim?.name %>
+          </p>
 
-	<p>
-  	<strong>Lugar:</strong>
-  	<%= @instance.date %>
-	</p>
+          <p>
+            <strong>Fecha Ocurrencia:</strong>
+            <%= @instance.date.to_date %>
+          </p>
 
-<p>
-  <strong>Fecha:</strong>
-  <%= @instance.date %>
-</p>
+          <p>
+            <strong>Arma:</strong>
+            <%# @instance.weapon.name %>
+            <% @instance.weapons.each do |w| %>
+              <%=  w.name %>
+            <% end %>
+          </p>
 
-<p>
-  <strong>Arma:</strong>
-  <%# @instance.weapon.name %>
-  <% @instance.weapons.each do |w| %>
-  	<%=  w.name %>
-	<% end %>
-</p>
+          <p>
+            <strong>Lugar:</strong>
+            <%# @instance.place.name %>
+            <% @instance.places.each do |p| %>
+              <%=  p.name %>
+            <% end %>
+          </p>
+          <p>
+            <strong>Description:</strong>
+            <%= @instance.description %>
+          </p>
+          <% if close?(@instance.id) %>
+            <p>
+              <strong>Fecha Cerrado:</strong>
+              <%= @instance.date_close.to_date %>
+            </p>
+          <% end %>
+          <% end %>
 
-<p>
-  <strong>Lugar:</strong>
-  <%# @instance.place.name %>
-  <% @instance.places.each do |p| %>
-  	<%=  p.name %>
-	<% end %>
-</p>
-
-
-<p>
-  <strong>Description:</strong>
-  <%= @instance.description %>
-</p>
- 
-<% end %>
-<p>
-  <strong>CasoCerrado</strong>
-  <%= @instance.state %>
-</p>
-
-
-<%= link_to 'Edit', edit_detective_instance_path(current_detective.id, @instance) %> |
-<%= link_to 'Back', detective_instances_path(current_detective.id) %> |
-<%= link_to 'Cerrar', close_detective_instance_path(current_detective.id, @instance) %>
+          <%= link_to 'Edit', edit_detective_instance_path(@instance.detective.id, @instance), class: "btn btn-default" %>
+          <%= link_to 'Back', detective_instances_path(@instance.detective.id), class: "btn btn-default" %>
+          <% if close?(@instance.id) %>
+            <%= link_to 'Abrir', close_detective_instance_path(@instance.detective.id, @instance.id), class: "btn btn-danger", data: {confirm: '¿Seguro que desea reabrir el caso?'} %>
+          <% else %>
+            <%= link_to 'Cerrar', close_detective_instance_path(@instance.detective.id, @instance.id), class: "btn btn-success" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
