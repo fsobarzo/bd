@@ -30,7 +30,7 @@ class GuestsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @guest.update(place_params)
+      if @guest.update(guest_params)
         format.html { redirect_to @guest, notice: 'Place was successfully updated.' }
         format.json { render :show, status: :ok, location: @guest }
       else

@@ -1,14 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-12">
+      <h1 class="page-header">Armas</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @weapon.name %>
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <b><%= @weapon.name.capitalize %></b>
+      </div>
+      <div class="panel-body">
 
-<p>
-  <strong>Description:</strong>
-  <%= @weapon.description %>
-</p>
+				<p>
+				  <strong>Name:</strong>
+				  <%= @weapon.name %>
+				</p>
 
-<%= link_to 'Edit', edit_weapon_path(@weapon) %> |
-<%= link_to 'Back', weapons_path %>
+				<p>
+				  <strong>Description:</strong>
+				  <%= @weapon.description %>
+				</p>
+
+				<%= link_to 'Edit', edit_weapon_path(@weapon), class: "btn btn-default" %>
+				<%= link_to 'Back', weapons_path, class: "btn btn-default" %>
+			</div>
+		</div>
+	</div>
+</div>
+
