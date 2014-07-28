@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 20140728015355) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "detective_id"
     t.boolean  "state",        default: false
+    t.string   "detective_id"
   end
 
   create_table "instances_places", id: false, force: true do |t|
@@ -82,14 +82,6 @@ ActiveRecord::Schema.define(version: 20140728015355) do
   create_table "instances_weapons", id: false, force: true do |t|
     t.integer "instance_id"
     t.integer "weapon_id"
-  end
-
-  create_table "people", force: true do |t|
-    t.string   "nombre"
-    t.integer  "edad"
-    t.string   "ocupacion"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "places", force: true do |t|
