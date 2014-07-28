@@ -58,6 +58,7 @@ class InstancesController < ApplicationController
   end
 
   def show
+    @guests = Guest.where(instance_id: nil)
   end
 
   def destroy
@@ -79,6 +80,12 @@ class InstancesController < ApplicationController
     instance.date_close = Time.zone.now
     instance.save
     redirect_to detective_instances_path(instance.detective.id)
+  end
+
+  def acuse
+    guest = Guest.find(params[:guests])
+    guest.update_attributes(:instance_id => params[:id], :suspect => params[:suspect])
+    redirect_to detective_instances_path(current_detective.id)
   end
 
   private

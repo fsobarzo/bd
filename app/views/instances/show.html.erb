@@ -34,7 +34,6 @@
               <%=  w.name %>
             <% end %>
           </p>
-
           <p>
             <strong>Lugar:</strong>
             <%# @instance.place.name %>
@@ -52,15 +51,78 @@
               <%= @instance.date_close.to_date %>
             </p>
           <% end %>
-          <% end %>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td><b>Evidencias</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              <% @instance.evidences.each do |e| %>
+              <tr>
+                <td><%= e.description %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to 'Nueva Evidencia', new_detective_instance_evidence_path(@instance.detective, @instance), class: "btn btn-default" %>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td><b>Notas</b></td>
+              </tr>
+            </thead>
+            <tbody>
+            <% @instance.notes.each do |n| %>
+              <tr>
+                <td><%= n.description %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <%= link_to 'Nueva Nota', new_detective_instance_note_path(@instance.detective, @instance), class: "btn btn-default" %>
 
-          <%= link_to 'Edit', edit_detective_instance_path(@instance.detective.id, @instance), class: "btn btn-default" %>
-          <%= link_to 'Back', detective_instances_path(@instance.detective.id), class: "btn btn-default" %>
-          <% if close?(@instance.id) %>
-            <%= link_to 'Abrir', close_detective_instance_path(@instance.detective.id, @instance.id), class: "btn btn-danger", data: {confirm: '¿Seguro que desea reabrir el caso?'} %>
-          <% else %>
-            <%= link_to 'Cerrar', close_detective_instance_path(@instance.detective.id, @instance.id), class: "btn btn-success" %>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td><b>Personas Involucradas</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              <% @instance.guests.each do |ig| %>
+                <% if !ig.victim %>
+                <tr>
+                  <td><%= ig.name %></td>
+                </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <%= form_tag(acuse_detective_instance_path(@instance.detective,@instance), html: {role: "form"}) do %>
+                <div class="form-group">
+                  <%= label_tag :guests %><br>
+                  <%= select_tag "guests", options_from_collection_for_select(@guests,"id","name"), class: "form-control" %>
+                </div>
+                
+                <div class="form-group">
+                  <%= label_tag "Principal Sospechoso" %><br>
+                  <%= check_box_tag 'suspect', true, class: "form-control" %>
+                </div>
+                <div class="actions">
+                  <%= submit_tag("Acusar", class: "btn btn-default") %>
+                </div>
           <% end %>
+          
+        <% end %>
+        </br>
+        <%= link_to 'Edit', edit_detective_instance_path(@instance.detective.id, @instance), class: "btn btn-default" %>
+        <%= link_to 'Back', detective_instances_path(@instance.detective.id), class: "btn btn-default" %>
+        <% if close?(@instance.id) %>
+          <%= link_to 'Abrir', close_detective_instance_path(@instance.detective.id, @instance.id), class: "btn btn-danger", data: {confirm: '¿Seguro que desea reabrir el caso?'} %>
+        <% else %>
+          <%= link_to 'Cerrar', close_detective_instance_path(@instance.detective.id, @instance.id), class: "btn btn-success" %>
+        <% end %>
       </div>
     </div>
   </div>

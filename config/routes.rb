@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  #get 'notes/new'
+  #get 'notes/create'
+  #get 'evidence/new'
+
   resources :weapons
   resources :places
 
@@ -25,13 +29,20 @@ Rails.application.routes.draw do
 
   resources :detectives do  
     resources :instances do
+      resources :evidences, :only => [:new, :create]
+      resources :notes, :only => [:new, :create]
       member do
         get :close
+        post :acuse
       end
     end
   end
 
-  resources :guests
+  resources :guests do
+    member do
+      get :acuse
+    end
+  end
 
   # Example resource route with options:
   #   resources :products do

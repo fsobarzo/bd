@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 20140728160636) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "state",        default: false
     t.string   "detective_id"
+    t.boolean  "state",        default: false
     t.datetime "date_close"
   end
 
