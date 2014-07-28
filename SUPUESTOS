@@ -1,0 +1,11 @@
+Para la revisión de la tarea realizar lo siguiente:
+
+1) Realizar un bundle install
+2) Realizar un rake db:migrate
+3) Agregar un admin via http://localhost:3000/admins/sign_up 
+4) Agregar armas, lugares, via panel administrador
+5) Registrar detectives
+6) Agregar Personas
+7) Agregar multiples casos, llenar información.
+8) Revisar estadisticas admin.
+

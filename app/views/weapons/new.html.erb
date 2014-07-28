@@ -1,5 +1,22 @@
-<h1>New weapon</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', weapons_path %>
+<div class="row">
+  <div class="col-lg-12">
+      <h1 class="page-header">Casos</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      	<%= link_to "Armas", weapons_path %> > Agregar Arma
+			</div>
+      <div class="panel-body">
+      	<div class="row">
+      		<div class="col-lg-6">
+      			<%= render 'form' %>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>

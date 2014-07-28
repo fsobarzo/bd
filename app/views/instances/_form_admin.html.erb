@@ -1,4 +1,4 @@
-<%= form_for [current_detective, @instance] do |f| %>
+<%= form_for [@instance.detective, @instance] do |f| %>
   <% if @instance.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@instance.errors.count, "error") %> prohibido este caso por las siguientes razones:</h2>

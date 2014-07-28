@@ -1,5 +1,6 @@
 class InstancesController < ApplicationController
 
+  before_filter :authenticate_admin!, only: [:index_admin]
   before_filter :authenticate_user!
   before_filter :self!, only: [:edit, :destroy]
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
@@ -9,6 +10,10 @@ class InstancesController < ApplicationController
   before_action :set_detective, only: [:create]
   
   def index
+    @instances = Instance.all
+  end
+
+  def index_admin
     @instances = Instance.all
   end
 
@@ -40,9 +45,10 @@ class InstancesController < ApplicationController
   end
 
   def update
+
     respond_to do |format|
       if @instance.update(place_params)
-        format.html { redirect_to detective_instance_path(current_detective, @instance), notice: 'Place was successfully updated.' }
+        format.html { redirect_to detective_instance_path(@instance.detective.id, @instance), notice: 'Place was successfully updated.' }
         format.json { render :show, status: :ok, location: @instance }
       else
         format.html { render :edit }
@@ -55,6 +61,10 @@ class InstancesController < ApplicationController
   end
 
   def destroy
+    g = @instance.guests.victim?
+    g.victim = false
+    g.save
+
     @instance.destroy
     respond_to do |format|
       format.html { redirect_to detective_instances_path, notice: 'Place was successfully destroyed.' }
@@ -66,7 +76,9 @@ class InstancesController < ApplicationController
     instance = Instance.find(params[:id])
     state = !instance.state
     instance.update_attributes(:state => state)
-    redirect_to detective_instances_path(current_detective.id)
+    instance.date_close = Time.zone.now
+    instance.save
+    redirect_to detective_instances_path(instance.detective.id)
   end
 
   private
