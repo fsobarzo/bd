@@ -54,6 +54,37 @@
   <%= @instance.state %>
 </p>
 
+<%= link_to 'Nueva Evidencia', new_detective_instance_evidence_path(current_detective, @instance) %>
+<% @instance.evidences.each do |e| %>
+  <%= e.description %>
+<% end %>
+
+
+<%= link_to 'Nueva Nota', new_detective_instance_note_path(current_detective, @instance) %>
+<% @instance.notes.each do |n| %>
+  <%= n.description %>
+<% end %>
+
+
+<%# link_to 'Nuevo Sospechoso', suspect_detective_instance_path(current_detective,@instance) %>
+
+<%= form_tag(acuse_detective_instance_path(current_detective,@instance)) do %>
+
+      <%= label_tag :guests %><br>
+      <%= select_tag "guests", options_from_collection_for_select(@guests,"id","name") %>
+      <br>
+      <%= label_tag "Principal Sospechoso" %><br>
+      <%= check_box_tag 'suspect', true %>
+      <%= submit_tag("Acusar") %>
+<% end %>
+
+<% @instance.guests.each do |ig| %>
+   <% if !ig.victim %>
+    <%= ig.name %>
+   <% end %>
+<% end %>
+
+
 
 <%= link_to 'Edit', edit_detective_instance_path(current_detective.id, @instance) %> |
 <%= link_to 'Back', detective_instances_path(current_detective.id) %> |

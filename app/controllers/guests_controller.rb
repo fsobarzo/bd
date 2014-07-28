@@ -51,6 +51,10 @@ class GuestsController < ApplicationController
     end
   end
 
+  def acuse
+    
+  end
+
   private
     def set_guest
       @guest = Guest.find(params[:id])

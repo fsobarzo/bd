@@ -52,6 +52,7 @@ class InstancesController < ApplicationController
   end
 
   def show
+    @guests = Guest.where(instance_id: nil)
   end
 
   def destroy
@@ -66,6 +67,12 @@ class InstancesController < ApplicationController
     instance = Instance.find(params[:id])
     state = !instance.state
     instance.update_attributes(:state => state)
+    redirect_to detective_instances_path(current_detective.id)
+  end
+
+  def acuse
+    guest = Guest.find(params[:guests])
+    guest.update_attributes(:instance_id => params[:id], :suspect => params[:suspect])
     redirect_to detective_instances_path(current_detective.id)
   end
 
