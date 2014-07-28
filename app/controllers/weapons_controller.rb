@@ -1,4 +1,7 @@
 class WeaponsController < ApplicationController
+
+  before_filter :authenticate_admin!
+
   before_action :set_weapon, only: [:show, :edit, :update, :destroy]
 
   # GET /weapons

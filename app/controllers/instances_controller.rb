@@ -1,8 +1,11 @@
 class InstancesController < ApplicationController
 
+  before_filter :authenticate_user!
+  before_filter :self!, only: [:edit, :destroy]
   before_action :set_instance, only: [:show, :edit, :update, :destroy]
   before_action :set_weapon, only: [:create]
   before_action :set_place, only: [:create]
+  before_action :set_guest, only: [:create]
   before_action :set_detective, only: [:create]
   
   def index
@@ -16,6 +19,8 @@ class InstancesController < ApplicationController
   def create
     @instance = Instance.new(place_params)
 
+    @guest.victim = true
+    @instance.guests << @guest
     @instance.weapons<<@weapon
     @instance.places<<@place
     @instance.detective = @detective
@@ -61,9 +66,8 @@ class InstancesController < ApplicationController
     instance = Instance.find(params[:id])
     state = !instance.state
     instance.update_attributes(:state => state)
-    redirect_to detective_instances_path
+    redirect_to detective_instances_path(current_detective.id)
   end
-
 
   private
     def set_instance
@@ -84,5 +88,9 @@ class InstancesController < ApplicationController
 
     def set_place
       @place = Place.find(params[:instance][:places])
+    end
+
+    def set_guest
+      @guest = Guest.find(params[:instance][:guests])
     end
 end

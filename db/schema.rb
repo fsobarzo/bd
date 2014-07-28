@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140719080355) do
+ActiveRecord::Schema.define(version: 20140728015355) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -46,6 +45,8 @@ ActiveRecord::Schema.define(version: 20140719080355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "instance_id"
+    t.string   "name"
+    t.string   "lastname"
   end
 
   add_index "detectives", ["email"], name: "index_detectives_on_email", unique: true
@@ -57,6 +58,8 @@ ActiveRecord::Schema.define(version: 20140719080355) do
     t.string   "ocupation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "instance_id"
+    t.boolean  "victim"
   end
 
   create_table "instances", force: true do |t|
@@ -68,7 +71,7 @@ ActiveRecord::Schema.define(version: 20140719080355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "detective_id"
-    t.boolean  "state",       default: false
+    t.boolean  "state",        default: false
   end
 
   create_table "instances_places", id: false, force: true do |t|
@@ -79,6 +82,14 @@ ActiveRecord::Schema.define(version: 20140719080355) do
   create_table "instances_weapons", id: false, force: true do |t|
     t.integer "instance_id"
     t.integer "weapon_id"
+  end
+
+  create_table "people", force: true do |t|
+    t.string   "nombre"
+    t.integer  "edad"
+    t.string   "ocupacion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "places", force: true do |t|

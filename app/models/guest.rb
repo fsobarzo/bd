@@ -1,3 +1,7 @@
 class Guest < ActiveRecord::Base
-has_one :detective
+ belongs_to :instance
+
+ def self.victim?
+ 	where(victim: true).first
+ end
 end

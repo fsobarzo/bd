@@ -1,14 +1,25 @@
+<div class="row">
+  <div class="col-lg-12">
+      <h1 class="page-header">Casos</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
 <p id="notice"><%= notice %></p>
- 
+
 <p>
   <strong>Name:</strong>
   <%= @instance.name %>
 </p>
+<% if can? %>
+	<p>
+	  <strong>Victima:</strong>
+	  <%= @instance.guests.victim?.name %>
+	</p>
 
-<p>
-  <strong>Victima:</strong>
-  <%= @instance.victim %>
-</p>
+	<p>
+  	<strong>Lugar:</strong>
+  	<%= @instance.date %>
+	</p>
 
 <p>
   <strong>Fecha:</strong>
@@ -37,6 +48,7 @@
   <%= @instance.description %>
 </p>
  
+<% end %>
 <p>
   <strong>CasoCerrado</strong>
   <%= @instance.state %>

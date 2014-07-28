@@ -7,8 +7,81 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">No repruebo ni kgando!</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if admin_signed_in? %>
+            <li class="dropdown">
+                <%= link_to fa_icon("dashboard", text: "Armas"), "#", class: "dropdown-toggle", data: { toggle: "dropdown"} %>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><%= link_to fa_icon("dashboard", text: "Ver Armas"), weapons_path %></li>
+                  <li><%= link_to fa_icon("dashboard", text: "Agregar Arma"), new_weapon_path %></li>
+                </ul>
+            </li>
 
-<%= yield %>
+            <li class="dropdown">
+                <%= link_to fa_icon("dashboard", text: "Lugares"), "#", class: "dropdown-toggle", data: { toggle: "dropdown"} %>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><%= link_to fa_icon("dashboard", text: "Ver Lugares"), places_path %></li>
+                  <li><%= link_to fa_icon("dashboard", text: "Agregar Lugar"), new_place_path %></li>
+                </ul>
+            </li>
 
+            <li><%= link_to fa_icon("user", text: "Casos") %></li>
+            <li><%= link_to fa_icon("user", text: "#{current_admin.email}") %></li>
+          
+            <li><%= link_to fa_icon("sign-out", text: "Salir"), destroy_admin_session_path, :method => :delete %></li>
+          <% elsif detective_signed_in? %>
+            <li class="dropdown">
+                <%= link_to fa_icon("dashboard", text: "Casos"), "#", class: "dropdown-toggle", data: { toggle: "dropdown"} %>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><%= link_to fa_icon("dashboard", text: "Ver Casos"), detective_instances_path(current_detective.id) %></li>
+                  <li><%= link_to fa_icon("dashboard", text: "Agregar Caso"), new_detective_instance_path(current_detective.id) %></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <%= link_to fa_icon("dashboard", text: "Personas"), "#", class: "dropdown-toggle", data: { toggle: "dropdown"} %>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><%= link_to fa_icon("dashboard", text: "Personas"), guests_path %></li>
+                  <li><%= link_to fa_icon("dashboard", text: "Agregar Persona"), new_guest_path %></li>
+                </ul>
+            </li>
+            
+            <li><%= link_to fa_icon("user", text: "#{current_detective.email}") %></li>
+          
+            <li><%= link_to fa_icon("sign-out", text: "Salir"), destroy_detective_session_path, :method => :delete %></li>
+          
+          <% else %>
+            <li><%= link_to fa_icon("sign-in", text: "Detective"), new_detective_session_path %></li>
+            
+            <li><%= link_to fa_icon("sign-in", text: "Admin"), new_admin_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 main">
+        <% if notice %>
+          <%= notice %>
+        <% end %>
+        <% if flash[:error] %>
+          <%= flash[:error] %>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
+  </div>	
 </body>
 </html>
