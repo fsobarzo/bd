@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(version: 20140728160636) do
     t.integer  "instance_id"
   end
 
+  create_table "people", force: true do |t|
+    t.string   "nombre"
+    t.integer  "edad"
+    t.string   "ocupacion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "places", force: true do |t|
     t.string   "name"
     t.text     "description"

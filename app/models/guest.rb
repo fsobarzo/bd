@@ -9,7 +9,8 @@ class Guest < ActiveRecord::Base
  	where(victim: false)
  end
 
- def self.victim_and_me(id)
- 	where("guests.victim = 'false' OR guests.id = '#{id}'")
+ def self.sospechoso?
+ 	where(suspect: true).first
  end
+
 end
